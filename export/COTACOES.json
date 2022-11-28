@@ -1,0 +1,43 @@
+{
+    "name": "COTACOES",
+    "description": "COTACOES",
+    "blueprint_spec": {
+        "requirements": ["core"],
+        "prepare": [],
+        "nodes": [
+            {
+                "id": "INICIO",
+                "type": "Start",
+                "name": "INICIO",
+                "next": "_____________",
+                "parameters": {
+                    "input_schema": {
+                        "type": "object",
+                        "properties": { "name": { "type": "string" } }
+                    }
+                },
+                "lane_id": "anyone"
+            },
+            { "opah": "INICIO" },
+            { "opah": "TESTE" },
+            { "opah": "EXIBIR-TOKEN" },
+            { "opah": "FIM" },
+            { "opah": "ENVIAR-TOKEN" },
+            { "opah": "TOKEN-VALIDO" },
+            { "opah": "COTACOES" }
+        ],
+        "lanes": [
+            {
+                "id": "restrito",
+                "name": "_____laneName_____",
+                "rule": { "$js": "() => true" }
+            },
+            {
+                "id": "anyone",
+                "name": "_____laneName_____",
+                "rule": { "$js": "() => true" }
+            }
+        ],
+        "environment": {}
+    }
+}

@@ -1,0 +1,61 @@
+{
+    "name": "RECEBE-COTACOES",
+    "description": "Recebe cotações",
+    "blueprint_spec": {
+      "requirements": [
+        "core"
+      ],
+      "prepare": [],
+      "nodes": [
+        {
+          "id": "INICIO-BP",
+          "name": "Início da BP",
+          "lane_id": "anyone",
+          "next": "GERAR-TOKEN",
+          "type": "Start",
+          "parameters": {
+            "input_schema": {},
+            "timeout": 6000
+          },
+          "nodeSpec": "inicioBp"
+        },
+        {
+          "id": "GERAR-TOKEN",
+          "name": "Gera um token",
+          "next": "FIM",
+          "type": "SystemTask",
+          "category": "setToBag",
+          "lane_id": "anyone",
+          "parameters": {
+            "input": {
+              "token": {
+                "$js": "() => `${Math.floor(1000 + Math.random() * 9000)}`"
+              }
+            }
+          },
+          "nodeSpec": "gerarToken"
+        },
+        {
+          "id": "FIM",
+          "type": "Finish",
+          "name": "Término",
+          "lane_id": "anyone",
+          "next": null,
+          "parameters": {
+            "input": {}
+          },
+          "nodeSpec": "fim"
+        }
+      ],
+      "lanes": [
+        {
+          "id": "anyone",
+          "name": "always true",
+          "rule": {
+            "$js": "() => true"
+          }
+        }
+      ],
+      "environment": {}
+    }
+  }
